@@ -1,5 +1,5 @@
        How To Use?
-$ pkg update && pkg upgrade
+       pkg update && pkg upgrade
 
 
 $ pkg install python
