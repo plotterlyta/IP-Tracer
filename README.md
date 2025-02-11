@@ -6,3 +6,4 @@
        python -m http.server 8080
 
 Now Go To Your Browser And Paste This
+        http://localhost:8080/
