@@ -4,133 +4,53 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IP Address Locator</title>
-    
     <style>
         body {
-            font-family: Arial, sans-serif;
-            font-size: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 80vh;
-            background-color: #f4f4f4;
             text-align: center;
-            
-        }
-        .output {
-            color: blue;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
         }
         .container {
-            font-size: 30px;
-            height: 500px;
-            background: grey;
-            text-align: center;
-            padding: 30px;
+            margin-top: 50px;
+            padding: 20px;
+            background: gray;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            animation: colorChange 40s infinite;
+            display: inline-block;
         }
-        .submit {
-            border-radius: 10px;
-            margin-left: 12px;
-            border-color: transparent;
-            cursor: pointer;
-            margin-top: 30px;
-        }
-        input, button, h2, p {
+        input {
+            width: 80%;
             padding: 10px;
             margin-top: 10px;
-            width: 100%;
-            height: 30px;
-            border-radius: 10px;
-            text-align: centre;
-            border-color: transparent 
         }
         button {
-            height: 50px;
-            background-color: black;
-            font-size: 17px;
+            margin-top: 10px;
+            padding: 10px;
+            background: black;
+            color: orange;
+            border: none;
+            cursor: pointer;
         }
-        
-        
-        @keyframes colorChange {
-            0% { color: red; }
-            1.56% { color: blue; }
-            3.12% { color: green; }
-            4.68% { color: orange; }
-            6.25% { color: purple; }
-            7.81% { color: pink; }
-            9.37% { color: cyan; }
-            10.93% { color: lime; }
-            12.5% { color: yellow; }
-            14.06% { color: magenta; }
-            15.62% { color: teal; }
-            17.18% { color: brown; }
-            18.75% { color: coral; }
-            20.31% { color: violet; }
-            21.87% { color: gold; }
-            23.43% { color: navy; }
-            25% { color: olive; }
-            26.56% { color: indigo; }
-            28.12% { color: salmon; }
-            29.68% { color: hotpink; }
-            31.25% { color: darkgreen; }
-            32.81% { color: chocolate; }
-            34.37% { color: dodgerblue; }
-            35.93% { color: skyblue; }
-            37.5% { color: firebrick; }
-            39.06% { color: lavender; }
-            40.62% { color: maroon; }
-            42.18% { color: lightseagreen; }
-            43.75% { color: sandybrown; }
-            45.31% { color: sienna; }
-            46.87% { color: slateblue; }
-            48.43% { color: tomato; }
-            50% { color: turquoise; }
-            51.56% { color: yellowgreen; }
-            53.12% { color: azure; }
-            54.68% { color: beige; }
-            56.25% { color: darkblue; }
-            57.81% { color: darkorange; }
-            59.37% { color: forestgreen; }
-            60.93% { color: gainsboro; }
-            62.5% { color: honeydew; }
-            64.06% { color: khaki; }
-            65.62% { color: lawngreen; }
-            67.18% { color: lemonchiffon; }
-            68.75% { color: lightcoral; }
-            70.31% { color: mediumpurple; }
-            71.87% { color: mediumvioletred; }
-            73.43% { color: mintcream; }
-            75% { color: mistyrose; }
-            76.56% { color: moccasin; }
-            78.12% { color: orchid; }
-            79.68% { color: palevioletred; }
-            81.25% { color: peru; }
-            82.81% { color: plum; }
-            84.37% { color: seagreen; }
-            85.93% { color: slategray; }
-            87.5% { color: steelblue; }
-            89.06% { color: thistle; }
-            90.62% { color: wheat; }
-            92.18% { color: whitesmoke; }
-            93.75% { color: darkred; }
-            95.31% { color: darkcyan; }
-            96.87% { color: darkslateblue; }
-            98.43% { color: darkturquoise; }
-            100% { color: red; }
+        #output {
+            margin-top: 20px;
+            font-size: 18px;
+            color: blue;
         }
+    </style>
+</head>
+<body>
 
-        h2, p, input, button {
-            animation: colorChange 30s infinite;
-        }
-    </style>
-    </style>
-        
-    
+    <h2 style="color: magenta;">IP Address Locator</h2>
+    <p style="color: magenta;">Enter an IP Address:</p>
+
+    <div class="container">
+        <input type="text" id="ipInput" placeholder="8.8.8.8">
+        <button onclick="getIPDetails(event)">Find Location</button>
+        <p id="output"></p>
+    </div>
+
     <script>
         async function getIPDetails(event) {
-            event.preventDefault();
+            event.preventDefault(); // Prevent form submission (if inside a form)
             let ip = document.getElementById("ipInput").value;
             let output = document.getElementById("output");
 
@@ -142,7 +62,10 @@
             output.innerText = "Fetching details...";
             try {
                 let response = await fetch(`https://ip-api.com/json/${ip}`);
+                console.log("Response status:", response.status);
+                
                 let data = await response.json();
+                console.log("API Response:", data);
 
                 if (data.status === "fail") {
                     output.innerText = "Invalid IP address or not found.";
@@ -159,19 +82,11 @@
                     <strong>Longitude:</strong> ${data.lon} <br>
                 `;
             } catch (error) {
+                console.error("Error fetching data:", error);
                 output.innerText = "Error fetching data. Please try again.";
             }
         }
     </script>
-</head>
-<body>
-    <div
-            <h1 class="container">IP Address Locator</h1>
-    <form onsubmit="getIPDetails(event)">
-        <label for="ipInput">Enter an IP Address:</label>
-        <input type="text" id="ipInput" required>
-        <button class="submit" type="submit">Find Location</button>
-    </input>
-    <b class="output" id="output"></b>
+
 </body>
 </html>
