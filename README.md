@@ -1,8 +1,4 @@
        How To Use?
        pkg update && pkg upgrade
-
-
-$ pkg install python
-
-
-$ python -m http.server 8080
+       pkg install python
+       python -m http.server 8080
